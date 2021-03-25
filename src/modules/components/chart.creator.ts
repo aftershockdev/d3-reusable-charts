@@ -1,9 +1,10 @@
 import * as d3 from "d3";
 import "./chart.plugins";
 
-import { IValue, SvgD3Selection } from "../../interfaces/charts.interfaces";
+import { SvgD3Selection } from "../../interfaces/charts.interfaces";
 import { getChart } from "./chart.register";
 import { chartDataConfiguration } from "./chart.configuration";
+import { createXscale, createYscale } from "./chart.scales";
 
 interface ICreator {
   data: object[];
@@ -24,7 +25,7 @@ export interface ITypes {
 export interface ISettings {
   data: object[];
   diagram: SvgD3Selection;
-  x: d3.ScaleBand<string>;
+  x: d3.ScaleTime<number, number, never> | d3.ScaleBand<any>;
   y: d3.ScaleLinear<number, number, never>;
   width: number;
   height: number;
@@ -38,7 +39,7 @@ export default class Creator implements ICreator {
   constructor(data: object[], config: IConfig, dataTypes: ITypes) {
     this.config = config;
     this.dataTypes = dataTypes;
-    this.data = chartDataConfiguration(data, dataTypes);
+    this.data = chartDataConfiguration(data, config, dataTypes);
 
     this.createSVG();
   }
@@ -62,16 +63,8 @@ export default class Creator implements ICreator {
       .attr("height", defaults.height)
       .attr("overflow", "visible");
 
-    let x = d3
-      .scaleBand()
-      .domain(<any>d3.range(this.data.length))
-      .range([defaults.margin.left, defaults.width - defaults.margin.right]);
-
-    let y = d3
-      .scaleLinear()
-      .domain(<any>[0, d3.max(this.data, (d: IValue) => d.value)])
-      .nice()
-      .range([defaults.height - defaults.margin.bottom, defaults.margin.top]);
+    let x = createXscale(this.data, defaults, this.config, this.dataTypes);
+    let y = createYscale(this.data, defaults, this.config.type);
 
     let xAxis = d3.axisBottom(x);
     let yAxis = d3.axisLeft(y);

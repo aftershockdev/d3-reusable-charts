@@ -7,7 +7,7 @@ export const data_one: object[] = [
     CityCode: "",
     Lat: "0",
     Lon: "0",
-    Cases: "240",
+    Cases: 240,
     Status: "confirmed",
     Date: "2020-03-21T00:00:00Z",
   },
