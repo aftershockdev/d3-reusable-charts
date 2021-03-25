@@ -1,6 +1,6 @@
 interface Chart {
   [index: string]: any;
-  render: (data: object[] | any, context: any) => void;
+  render?: (data: object[] | any, context: any) => void;
 }
 interface Registry {
   [key: string]: Chart;
