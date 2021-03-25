@@ -5636,7 +5636,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*******************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"chartDataConfiguration\": () => (/* binding */ chartDataConfiguration)\n/* harmony export */ });\nvar chartDataConfiguration = function (data, dataTypes) {\r\n    return [{}];\r\n};\r\n\n\n//# sourceURL=webpack://chart-creator/./src/modules/components/chart.configuration.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"chartDataConfiguration\": () => (/* binding */ chartDataConfiguration)\n/* harmony export */ });\nvar chartDataConfiguration = function (data, dataTypes) {\r\n    console.log(data, dataTypes);\r\n    return [{}];\r\n};\r\n\n\n//# sourceURL=webpack://chart-creator/./src/modules/components/chart.configuration.ts?");
 
 /***/ }),
 
