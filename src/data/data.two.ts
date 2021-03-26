@@ -21,4 +21,9 @@ export const data_two: object[] = [
   { date: "2014-11-20", value: 431 },
   { date: "2014-11-21", value: 531 },
   { date: "2014-11-22", value: 631 },
+  { date: "2014-11-23", value: 731 },
+  { date: "2014-11-24", value: 331 },
+  { date: "2014-11-25", value: 531 },
+  { date: "2014-11-26", value: 631 },
+  { date: "2014-11-27", value: 231 },
 ];
