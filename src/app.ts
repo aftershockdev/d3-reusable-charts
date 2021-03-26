@@ -39,7 +39,7 @@ const lonfig_two = {
 const lonfig_three = {
   type: "bar",
   x: "Province",
-  y: "Confirmed",
+  y: "Deaths",
 };
 const lonfig_four = {
   type: "bar",
@@ -68,7 +68,7 @@ const data_types_three = {
   Province: {
     type: "string",
   },
-  Confirmed: {
+  Deaths: {
     type: "number",
   },
 };
