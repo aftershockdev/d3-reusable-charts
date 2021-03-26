@@ -14,23 +14,24 @@ export const createXscale = (
   dataTypes: ITypes
 ): d3.ScaleTime<number, number, never> | d3.ScaleBand<any> => {
   let x: d3.ScaleTime<number, number, never> | d3.ScaleBand<any>;
+
   let currentType = dataTypes[config.x].type;
 
   if (currentType === "date") {
     x = d3
       .scaleTime()
       .domain(<any>d3.extent(data, (d: IDate) => d.date))
-      .range([defaults.margin.left, defaults.width - defaults.margin.right]);
+      .range([defaults.margin.left, defaults.width]);
   } else if (currentType === "string") {
     x = d3
       .scaleBand()
       .domain(<any>data.map((d: IDate) => d.date))
-      .range([defaults.margin.left, defaults.width - defaults.margin.right]);
+      .range([defaults.margin.left, defaults.width]);
   } else {
     x = d3
       .scaleBand()
       .domain(<any>d3.range(data.length))
-      .range([defaults.margin.left, defaults.width - defaults.margin.right]);
+      .range([defaults.margin.left, defaults.width]);
   }
 
   return x;
@@ -46,5 +47,6 @@ export const createYscale = (
     .domain(<any>[0, d3.max(data, (d: IValue) => d.value)])
     .nice()
     .range([defaults.height - defaults.margin.bottom, defaults.margin.top]);
+
   return y;
 };

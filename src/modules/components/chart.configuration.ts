@@ -13,11 +13,13 @@ export const chartDataConfiguration = (
 
   if (dataTypes[config.x].type === "date") {
     let result = data.map((el: IElement) => {
-      const d = {
-        date: new Date(el[config.x]),
-        value: el[config.y],
-      };
-      return d;
+      if (el[config.x] && el[config.y]) {
+        const d = {
+          date: new Date(el[config.x]),
+          value: el[config.y],
+        };
+        return d;
+      }
     });
 
     configuratedData.push(...result);

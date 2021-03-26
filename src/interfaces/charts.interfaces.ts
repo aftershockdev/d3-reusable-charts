@@ -28,7 +28,7 @@ export interface IDate {
   date: string;
 }
 export interface INumber {
-  value: number | NumberValue;
+  [key: string]: number | NumberValue;
 }
 
 export type GenericD3Selection = Selection<any, any, any, any>;

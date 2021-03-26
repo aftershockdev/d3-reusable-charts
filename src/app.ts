@@ -6,21 +6,42 @@ import { data_four } from "./data/data.four";
 
 //// configuration type and axis
 const config = {
-  type: "bar",
+  type: "line",
   x: "Date",
   y: "Cases",
 };
 const config_two = {
-  type: "bar",
+  type: "line",
   x: "date",
   y: "value",
 };
 const config_three = {
-  type: "bar",
+  type: "line",
   x: "Province",
   y: "Confirmed",
 };
 const config_four = {
+  type: "line",
+  x: "name",
+  y: "efficiency",
+};
+
+const lonfig = {
+  type: "bar",
+  x: "Date",
+  y: "Cases",
+};
+const lonfig_two = {
+  type: "bar",
+  x: "date",
+  y: "value",
+};
+const lonfig_three = {
+  type: "bar",
+  x: "Province",
+  y: "Confirmed",
+};
+const lonfig_four = {
   type: "bar",
   x: "name",
   y: "efficiency",
@@ -55,15 +76,23 @@ const data_types_four = {
   name: {
     type: "string",
   },
-  y: {
+  efficiency: {
     type: "number",
   },
 };
 
 new Creator(data_one, config, data_types);
 
+new Creator(data_two, config_two, data_types_two);
+
 new Creator(data_three, config_three, data_types_three);
 
 new Creator(data_four, config_four, data_types_four);
 
-new Creator(data_two, config_two, data_types_two);
+new Creator(data_one, lonfig, data_types);
+
+new Creator(data_two, lonfig_two, data_types_two);
+
+new Creator(data_three, lonfig_three, data_types_three);
+
+new Creator(data_four, lonfig_four, data_types_four);
