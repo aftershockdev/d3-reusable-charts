@@ -31,6 +31,10 @@ export interface INumber {
   [key: string]: number | NumberValue;
 }
 
+export interface ITooltip {
+  [key: string]: any;
+}
+
 export type GenericD3Selection = Selection<any, any, any, any>;
 export type SvgD3Selection = Selection<SVGElement, any, Element, any>;
 export type GD3Selection = Selection<SVGGElement, any, Element, any>;
