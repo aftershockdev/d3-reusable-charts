@@ -25,11 +25,13 @@ export const chartDataConfiguration = (
     configuratedData.push(...result);
   } else {
     let result = data.map((el: IElement) => {
-      const d = {
-        date: el[config.x],
-        value: el[config.y],
-      };
-      return d;
+      if (el[config.x] && el[config.y]) {
+        const d = {
+          date: el[config.x],
+          value: el[config.y],
+        };
+        return d;
+      }
     });
 
     configuratedData.push(...result);

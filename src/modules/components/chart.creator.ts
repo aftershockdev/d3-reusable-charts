@@ -25,10 +25,11 @@ export interface ITypes {
 export interface ISettings {
   data: object[];
   diagram: SvgD3Selection;
-  x: d3.ScaleTime<number, number, never> | d3.ScaleBand<any>;
+  [key: string]: any;
   y: d3.ScaleLinear<number, number, never>;
   width: number;
   height: number;
+  currentType: string;
 }
 
 export default class Creator implements ICreator {
@@ -95,6 +96,7 @@ export default class Creator implements ICreator {
         y,
         width: defaults.width,
         height: defaults.height,
+        currentType: this.dataTypes[this.config.x].type,
       }
     );
 

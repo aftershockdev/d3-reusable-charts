@@ -74,7 +74,7 @@ const data_types_three = {
 };
 const data_types_four = {
   name: {
-    type: "string",
+    type: "number",
   },
   efficiency: {
     type: "number",
@@ -88,6 +88,8 @@ new Creator(data_two, config_two, data_types_two);
 new Creator(data_three, config_three, data_types_three);
 
 new Creator(data_four, config_four, data_types_four);
+
+////
 
 new Creator(data_one, lonfig, data_types);
 

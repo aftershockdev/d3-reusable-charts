@@ -5,7 +5,7 @@ interface ILine {}
 
 export default class Line implements ILine {
   constructor() {}
-  draw({ data, diagram, x, y, width, height }: ISettings) {
+  draw({ data, diagram, x, y, width, height, currentType }: ISettings) {
     const bisectDate = d3.bisector((d: any) => d.date).left;
     const dateFormatter = d3.timeFormat("%Y/%m/%d");
     const area = diagram.append("g").attr("class", "line");
@@ -26,7 +26,11 @@ export default class Line implements ILine {
         d3
           .line<any>()
           .curve(d3.curveCardinal)
-          .x((d: INumber) => x(d.date))
+          .x((d: INumber, i: number) => {
+            return currentType === "date" || currentType === "string"
+              ? x(d.date)
+              : x(i);
+          })
           .y((d: INumber) => y(d.value))
       );
     // let brush = d3.brushX().extent([

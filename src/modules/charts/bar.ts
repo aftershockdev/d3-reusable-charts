@@ -5,7 +5,7 @@ import { INumber } from "../../interfaces/charts.interfaces";
 interface IBar {}
 
 export default class Bar implements IBar {
-  draw({ data, diagram, x, y, width, height }: ISettings) {
+  draw({ data, diagram, x, y, width, height, currentType }: ISettings) {
     let bars = diagram.append("g").attr("transform", "translate(10,-5)");
     bars
       .append("g")
@@ -14,9 +14,15 @@ export default class Bar implements IBar {
       .data(data)
       .join("rect")
       .style("mix-blend-mode", "multiply")
-      .attr("x", (d: any) => x(d.date))
+      .attr("x", (d: any, i: number) => {
+        return currentType === "date" || currentType === "string"
+          ? x(d.date)
+          : x(i);
+      })
       .attr("y", (d: INumber) => y(d.value))
       .attr("height", (d: INumber) => y(0) - y(d.value))
-      .attr("width", width / data.length);
+      .attr("width", (d: INumber) => {
+        return currentType === "date" ? width / data.length : x.bandwidth() - 5;
+      });
   }
 }

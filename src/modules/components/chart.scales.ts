@@ -13,7 +13,7 @@ export const createXscale = (
   config: IConfig,
   dataTypes: ITypes
 ): d3.ScaleTime<number, number, never> | d3.ScaleBand<any> => {
-  let x: d3.ScaleTime<number, number, never> | d3.ScaleBand<any>;
+  let x: d3.ScaleBand<any> | d3.ScaleTime<number, number, never>;
 
   let currentType = dataTypes[config.x].type;
 
@@ -33,7 +33,6 @@ export const createXscale = (
       .domain(<any>d3.range(data.length))
       .range([defaults.margin.left, defaults.width]);
   }
-
   return x;
 };
 
