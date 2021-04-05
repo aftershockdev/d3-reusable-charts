@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 
-import { IValue, IDate } from "../../interfaces/charts.interfaces";
+import { IValue, IDate } from "../../charts.iconfig/charts.configuration";
 import { IConfig, ITypes } from "../components/chart.creator";
 
 interface IDefaults {

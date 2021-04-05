@@ -1,5 +1,4 @@
 import { ITypes, IConfig } from "./chart.creator";
-
 interface IElement {
   [key: string]: string | number;
 }

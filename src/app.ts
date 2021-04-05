@@ -1,8 +1,8 @@
 import Creator from "./modules/components/chart.creator";
-import { data_one } from "./data/data.one";
-import { data_two } from "./data/data.two";
-import { data_three } from "./data/data.three";
-import { data_four } from "./data/data.four";
+import { data_one } from "./test.data/data.one";
+import { data_two } from "./test.data/data.two";
+import { data_three } from "./test.data/data.three";
+import { data_four } from "./test.data/data.four";
 
 //// configuration type and axis
 const config = {

@@ -1,11 +1,12 @@
-import { ISettings } from "../components/chart.creator";
-import { INumber } from "../../interfaces/charts.interfaces";
 import * as d3 from "d3";
-interface ILine {}
 
-export default class Line implements ILine {
-  constructor() {}
-  draw({ data, diagram, x, y, width, height, currentType }: ISettings) {
+import { INumber } from "../../charts.iconfig/charts.configuration";
+import { IChart } from "../../charts.iconfig/charts.interface";
+
+interface ILine extends IChart {}
+
+export default class Line {
+  public draw({ data, diagram, x, y, currentType }: ILine): void {
     const bisectDate = d3.bisector((d: any) => d.date).left;
     const dateFormatter = d3.timeFormat("%Y/%m/%d");
     const area = diagram.append("g").attr("class", "line");
@@ -33,6 +34,7 @@ export default class Line implements ILine {
           })
           .y((d: INumber) => y(d.value))
       );
+
     // let brush = d3.brushX().extent([
     //   [0, 0],
     //   [width, height],

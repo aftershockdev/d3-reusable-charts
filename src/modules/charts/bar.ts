@@ -1,11 +1,12 @@
 import * as d3 from "d3";
-import { ISettings } from "../components/chart.creator";
-import { INumber } from "../../interfaces/charts.interfaces";
 
-interface IBar {}
+import { INumber } from "../../charts.iconfig/charts.configuration";
+import { IChart } from "../../charts.iconfig/charts.interface";
 
-export default class Bar implements IBar {
-  draw({ data, diagram, x, y, width, height, currentType }: ISettings) {
+interface IBar extends IChart {}
+
+export default class Bar {
+  public draw({ data, diagram, x, y, width, height, currentType }: IBar): void {
     let bars = diagram.append("g").attr("transform", "translate(10,-5)");
     bars
       .append("g")
