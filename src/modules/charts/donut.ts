@@ -1,5 +1,5 @@
 import { ISettings } from "../components/chart.creator";
-import { IChart } from "../../charts.iconfig/charts.interface";
+import { IChart } from "../../interfaces/charts.interface";
 
 interface IDonut extends IChart {}
 

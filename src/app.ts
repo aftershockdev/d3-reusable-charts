@@ -1,100 +1,86 @@
 import Creator from "./modules/components/chart.creator";
-import { data_one } from "./test.data/data.one";
-import { data_two } from "./test.data/data.two";
-import { data_three } from "./test.data/data.three";
-import { data_four } from "./test.data/data.four";
+import { data_one } from "./data/data.one";
+import { data_two } from "./data/data.two";
+import { data_three } from "./data/data.three";
+import { DataTypeEnum } from "./interfaces/charts.interface";
 
-//// configuration type and axis
-const config = {
+let data = [
+  { column1: "Jhon", column2: 18 },
+  { column1: "Andrew", column2: 55 },
+  { column1: "Max", column2: 43 },
+];
+
+const chartConfiguration = {
+  type: "bar",
+  x: "column1",
+  y: "column2",
+};
+const chartConfiguration_one = {
   type: "line",
   x: "Date",
   y: "Cases",
 };
-const config_two = {
-  type: "line",
-  x: "date",
-  y: "value",
-};
-const config_three = {
-  type: "line",
-  x: "Province",
-  y: "Confirmed",
-};
-const config_four = {
-  type: "line",
-  x: "name",
-  y: "efficiency",
-};
-
-const lonfig = {
-  type: "bar",
-  x: "Date",
-  y: "Cases",
-};
-const lonfig_two = {
+const chartConfiguration_two = {
   type: "bar",
   x: "date",
   y: "value",
 };
-const lonfig_three = {
-  type: "bar",
+const chartConfiguration_three = {
+  type: "line",
   x: "Province",
   y: "Confirmed",
 };
-const lonfig_four = {
-  type: "bar",
-  x: "name",
-  y: "efficiency",
-};
 
-//// types of data
-const data_types = {
-  Date: {
-    type: "date",
+const dataModel = [
+  {
+    columnName: "column1",
+    description: "name",
+    dataType: DataTypeEnum.string,
   },
-  Cases: {
-    type: "number",
+  {
+    columnName: "column2",
+    description: "age",
+    dataType: DataTypeEnum.number,
   },
-};
-const data_types_two = {
-  date: {
-    type: "date",
+];
+const dataModel_one = [
+  {
+    columnName: "Date",
+    description: "date",
+    dataType: DataTypeEnum.date,
   },
-  value: {
-    type: "number",
+  {
+    columnName: "cases",
+    description: "deaths",
+    dataType: DataTypeEnum.number,
   },
-};
-const data_types_three = {
-  Province: {
-    type: "string",
+];
+const dataModel_two = [
+  {
+    columnName: "date",
+    description: "date",
+    dataType: DataTypeEnum.date,
   },
-  Confirmed: {
-    type: "number",
+  {
+    columnName: "value",
+    description: "sales",
+    dataType: DataTypeEnum.number,
   },
-};
-const data_types_four = {
-  name: {
-    type: "number",
+];
+const dataModel_three = [
+  {
+    columnName: "Province",
+    description: "province name",
+    dataType: DataTypeEnum.string,
   },
-  efficiency: {
-    type: "number",
+  {
+    columnName: "Confirmed",
+    description: "values of confirmed people",
+    dataType: DataTypeEnum.number,
   },
-};
+];
 
-new Creator(data_one, config, data_types);
-
-new Creator(data_two, config_two, data_types_two);
-
-new Creator(data_three, config_three, data_types_three);
-
-new Creator(data_four, config_four, data_types_four);
-
-////
-
-new Creator(data_one, lonfig, data_types);
-
-new Creator(data_two, lonfig_two, data_types_two);
-
-new Creator(data_three, lonfig_three, data_types_three);
-
-new Creator(data_four, lonfig_four, data_types_four);
+new Creator(data, chartConfiguration, dataModel);
+new Creator(data_one, chartConfiguration_one, dataModel_one);
+new Creator(data_two, chartConfiguration_two, dataModel_two);
+new Creator(data_three, chartConfiguration_three, dataModel_three);

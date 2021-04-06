@@ -1,7 +1,10 @@
 import * as d3 from "d3";
 
-import { IValue, IDate } from "../../charts.iconfig/charts.configuration";
-import { IConfig, ITypes } from "../components/chart.creator";
+import { IValue, IDate } from "../../interfaces/charts.configuration";
+import {
+  IChartConfiguration,
+  IDataModel,
+} from "../../interfaces/charts.interface";
 
 interface IDefaults {
   [key: string]: any;
@@ -10,19 +13,22 @@ interface IDefaults {
 export const createXscale = (
   data: object[],
   defaults: IDefaults,
-  config: IConfig,
-  dataTypes: ITypes
+  chartConfiguration: IChartConfiguration,
+  dataModel: IDataModel
 ): d3.ScaleTime<number, number, never> | d3.ScaleBand<any> => {
   let x: d3.ScaleBand<any> | d3.ScaleTime<number, number, never>;
+  let columnType: string;
 
-  let currentType = dataTypes[config.x].type;
+  if (dataModel[0].columnName === chartConfiguration.x) {
+    columnType = dataModel[0].dataType;
+  }
 
-  if (currentType === "date") {
+  if (columnType === "date") {
     x = d3
       .scaleTime()
       .domain(<any>d3.extent(data, (d: IDate) => d.date))
       .range([defaults.margin.left, defaults.width]);
-  } else if (currentType === "string") {
+  } else if (columnType === "string") {
     x = d3
       .scaleBand()
       .domain(<any>data.map((d: IDate) => d.date))

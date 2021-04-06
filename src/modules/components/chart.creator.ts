@@ -2,26 +2,19 @@ import * as d3 from "d3";
 import "./chart.plugins";
 
 import { getChart } from "./chart.register";
-import { chartDataConfiguration } from "./chart.configuration";
+import { chartDataConfiguration } from "./data_configuration";
 import { createXscale, createYscale } from "./chart.scales";
 
-import { SvgD3Selection } from "../../charts.iconfig/charts.configuration";
-import { IChart } from "../../charts.iconfig/charts.interface";
+import { SvgD3Selection } from "../../interfaces/charts.configuration";
+import {
+  IDataModel,
+  IChartConfiguration,
+} from "../../interfaces/charts.interface";
 
 interface ICreator {
   data: object[];
-  config: IConfig;
-  dataTypes: ITypes;
-}
-
-export interface IConfig {
-  type: string;
-  x: string;
-  y: string;
-}
-
-export interface ITypes {
-  [key: string]: any;
+  chartConfiguration: IChartConfiguration;
+  dataModel: IDataModel;
 }
 
 export interface ISettings {
@@ -32,25 +25,25 @@ export interface ISettings {
 
 export default class Creator implements ICreator {
   data: object[];
-  config: IConfig;
-  dataTypes: ITypes;
-  svg: any;
+  chartConfiguration: IChartConfiguration;
+  dataModel: IDataModel;
+  svg: SvgD3Selection;
 
   constructor(
     data: object[],
-    config: IConfig,
-    dataTypes: ITypes,
+    chartConfiguration: IChartConfiguration,
+    dataModel: IDataModel,
     width?: number,
     height?: number
   ) {
-    this.config = config;
-    this.dataTypes = dataTypes;
-    this.data = chartDataConfiguration(data, config, dataTypes);
+    this.chartConfiguration = chartConfiguration;
+    this.dataModel = dataModel;
+    this.data = chartDataConfiguration(data, chartConfiguration, dataModel);
 
     this.defaultSettings(width, height);
   }
 
-  private defaultSettings<ISettings>(width: number, height: number): void {
+  private defaultSettings(width: number, height: number): void {
     let settings = {
       width: width ? width : 1300,
       height: height ? height : 600,
@@ -71,9 +64,15 @@ export default class Creator implements ICreator {
       .attr("width", settings.width)
       .attr("height", settings.height)
       .attr("overflow", "visible");
+    console.log(svg, this.dataModel, this.chartConfiguration, this.data);
 
-    let x = createXscale(this.data, settings, this.config, this.dataTypes);
-    let y = createYscale(this.data, settings, this.config.type);
+    let x = createXscale(
+      this.data,
+      settings,
+      this.chartConfiguration,
+      this.dataModel
+    );
+    let y = createYscale(this.data, settings, this.chartConfiguration.type);
 
     let xAxis = d3.axisBottom(x);
     let yAxis = d3.axisLeft(y);
@@ -95,28 +94,21 @@ export default class Creator implements ICreator {
       .attr("transform", `translate(${settings.margin.left},0)`)
       .call(yAxis);
 
-    this.createChart(diagram, x, y, settings.width, settings.height);
+    this.createChart(svg, x, y, settings.width, settings.height);
   }
 
   private createChart(
-    diagram: SvgD3Selection,
-    x: any,
+    domElement: SvgD3Selection,
+    x: d3.ScaleBand<any> | d3.ScaleTime<number, number, never>,
     y: d3.ScaleLinear<number, number, never>,
     width: number,
     height: number
   ): void {
-    const chartSettings: IChart = Object.assign(
-      {},
-      {
-        data: this.data,
-        diagram,
-        x,
-        y,
-        width: width,
-        height: height,
-        currentType: this.dataTypes[this.config.x].type,
-      }
+    getChart(this.chartConfiguration.type).draw(
+      domElement,
+      this.chartConfiguration,
+      this.dataModel,
+      this.data
     );
-    getChart(this.config.type).draw(chartSettings);
   }
 }
