@@ -1,39 +1,52 @@
-import { ISettings } from "../components/chart.creator";
-import { INumber } from "../../interfaces/charts.interfaces";
 import * as d3 from "d3";
-interface ILine {}
 
-export default class Line implements ILine {
-  constructor() {}
-  draw({ data, diagram, x, y, width, height }: ISettings) {
-    const bisectDate = d3.bisector((d: any) => d.date).left;
-    const dateFormatter = d3.timeFormat("%Y/%m/%d");
-    const area = diagram.append("g").attr("class", "line");
+import { INumber, SvgD3Selection } from "../../interfaces/charts.configuration";
+import {
+  IChart,
+  IChartConfiguration,
+  IDataModel,
+} from "../../interfaces/charts.interface";
+interface ILine extends IChart {}
 
-    let focus = diagram
-      .append("g")
-      .attr("class", "focus")
-      .style("display", "none");
+export default class Line {
+  public draw(
+    nodeElement: SvgD3Selection,
+    chartConfiguration: IChartConfiguration,
+    dataModel: IDataModel,
+    data: object[]
+  ): void {
+    let message = "здесь будет линейный график";
+    nodeElement.append("text").text(message);
 
-    area
-      .append("path")
-      .datum(data)
-      .attr("fill", "none")
-      .attr("stroke", "steelblue")
-      .attr("stroke-width", 1.5)
-      .attr(
-        "d",
-        d3
-          .line<any>()
-          .curve(d3.curveCardinal)
-          .x((d: INumber) => x(d.date))
-          .y((d: INumber) => y(d.value))
-      );
+    // const bisectDate = d3.bisector((d: any) => d.date).left;
+    // const dateFormatter = d3.timeFormat("%Y/%m/%d");
+    // const area = diagram.append("g").attr("class", "line");
+    // let focus = diagram
+    //   .append("g")
+    //   .attr("class", "focus")
+    //   .style("display", "none");
+    // area
+    //   .append("path")
+    //   .datum(data)
+    //   .attr("fill", "none")
+    //   .attr("stroke", "steelblue")
+    //   .attr("stroke-width", 1.5)
+    //   .attr(
+    //     "d",
+    //     d3
+    //       .line<any>()
+    //       .curve(d3.curveCardinal)
+    //       .x((d: INumber, i: number) => {
+    //         return currentType === "date" || currentType === "string"
+    //           ? x(d.date)
+    //           : x(i);
+    //       })
+    //       .y((d: INumber) => y(d.value))
+    //   );
     // let brush = d3.brushX().extent([
     //   [0, 0],
     //   [width, height],
     // ]);
-
     // area.append("g").attr("class", "brush").call(brush);
     // focus
     //   .append("rect")
@@ -45,19 +58,16 @@ export default class Line implements ILine {
     //   .attr("y", -22)
     //   .attr("rx", 4)
     //   .attr("ry", 4);
-
     // focus
     //   .append("text")
     //   .attr("class", "tooltip-date")
     //   .attr("x", 30)
     //   .attr("y", 20);
-
     // focus
     //   .append("text")
     //   .attr("class", "tooltip-likes")
     //   .attr("x", 30)
     //   .attr("y", 0);
-
     // function mousemove(): void {
     //   let x0: any = x.invert(d3.pointer(event, this)[0]),
     //     i = bisectDate(data, x0, 1),
@@ -71,7 +81,6 @@ export default class Line implements ILine {
     //   focus.select(".tooltip-date").text(dateFormatter(d.date));
     //   focus.select(".tooltip-likes").text(d.value);
     // }
-
     // diagram
     //   .on("mouseover", function (): void {
     //     focus.style("display", null);

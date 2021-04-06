@@ -1,8 +1,9 @@
 import { ISettings } from "../components/chart.creator";
+import { IChart } from "../../interfaces/charts.interface";
 
-interface IDonut {}
+interface IDonut extends IChart {}
 
-export default class Donut implements IDonut {
+export default class Donut {
   constructor() {}
-  draw({ data, diagram, x, y, width, height }: ISettings) {}
+  draw({ data, diagram, x, y, width, height }: IDonut) {}
 }
